@@ -1,0 +1,678 @@
+﻿<html>
+    <head>
+        <title>BonziWORLD Revived! - The World's #1 BonziWORLD Server</title>
+        <meta charset="utf-8" />
+        <meta content="" />
+        <meta property="og:type" content="website" />
+        <meta property="og:site_name" content="BonziWORLD Revived!" />
+        <meta property="og:keywords" content="BonziWORLD, bonziworld, bwr, BWR, BonziWorld Revived, Bonziworld" />
+        <meta property="twitter:card" content="summary_large_image" />
+        <meta property="twitter:site" content="@BonziWRevived" />
+        <meta property="twitter:site:id" content="@BonziWRevived" />
+        <meta property="twitter:creator" content="@BonziWRevived" />
+        <meta property="twitter:creator:id" content="@BonziWRevived" />
+        <!-- section:ogImages -->
+        <meta property="twitter:image" content="https://cdn.discordapp.com/attachments/694985591762452611/703655741482860554/unknown.png" />
+        <meta property="og:image" content="https://cdn.discordapp.com/attachments/694985591762452611/703655741482860554/unknown.png" />
+        <!-- endsection -->
+        <meta property="og:locale" content="en-US" />
+        <link rel="icon" href="/favicons/favicon.ico" />
+        <!-- section:title -->
+        <!-- endsection -->
+        <meta data-react-helmet="true" charset="utf-8" />
+        <meta data-react-helmet="true" property="og:title" content="BonziWORLD Revived! - An open source revival of BonziWORLD project" />
+        <meta data-react-helmet="true" property="og:description" content="BonziWORLD Revived is an BonziBUDDY chat site with no viruses at all. It is fun to use and it also has rules. Chat, watch videos, record, and many others!" />
+        <meta data-react-helmet="true" name="description" content="BonziWORLD Revived is an BonziBUDDY chat site with no viruses at all. It is fun to use and it also has rules. Chat, watch videos, record, and many others!" />
+        <script type="text/javascript" id="www-widgetapi-script" src="https://www.youtube.com/s/player/2a6f5e06/www-widgetapi.vflset/www-widgetapi.js" async=""></script>
+        <script
+            type="text/javascript"
+            async=""
+            src="https://www.gstatic.com/recaptcha/releases/6OAif-f8nYV0qSFmq-D6Qssr/recaptcha__en.js"
+            crossorigin="anonymous"
+            integrity="sha384-f1gfYQgq4OmhARgCSe1q7WV7tIcPpqu0qD+jYdSEMczD1YXPg0ibdIzvD/fZzwKc"
+        ></script>
+        <script src="https://cdn.jsdelivr.net/npm/interactjs/dist/interact.min.js"></script>
+        <script src="https://www.google.com/recaptcha/api.js"></script>
+        <script src="./js/lib/clippy.min.js"></script>
+        <script data-dapp-detection="">
+            !(function () {
+                let e = !1;
+                function n() {
+                    if (!e) {
+                        const n = document.createElement("meta");
+                        (n.name = "dapp-detected"), document.head.appendChild(n), (e = !0);
+                    }
+                }
+                if (window.hasOwnProperty("ethereum")) {
+                    if (((window.__disableDappDetectionInsertion = !0), void 0 === window.ethereum)) return;
+                    n();
+                } else {
+                    var t = window.ethereum;
+                    Object.defineProperty(window, "ethereum", {
+                        configurable: !0,
+                        enumerable: !1,
+                        set: function (e) {
+                            window.__disableDappDetectionInsertion || n(), (t = e);
+                        },
+                        get: function () {
+                            if (!window.__disableDappDetectionInsertion) {
+                                const e = arguments.callee;
+                                (e && e.caller && e.caller.toString && -1 !== e.caller.toString().indexOf("getOwnPropertyNames")) || n();
+                            }
+                            return t;
+                        },
+                    });
+                }
+            })();
+        </script>
+        <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no" />
+        <meta name="mobile-web-app-capable" content="yes" />
+        <link rel="stylesheet" type="text/css" href="./css/style.min.css" />
+        <link rel="stylesheet" type="text/css" href="./css/clippy.css" media="all" />
+        <link rel="apple-touch-icon" sizes="180x180" href="./favicons/apple-touch-icon.png" />
+        <link rel="icon" type="image/png" href="./favicons/favicon-32x32.png" sizes="32x32" />
+        <link rel="icon" type="image/png" href="./favicons/favicon-16x16.png" sizes="16x16" />
+        <link rel="manifest" href="./favicons/manifest.json" />
+        <link rel="mask-icon" href="./favicons/safari-pinned-tab.svg" color="#5bbad5" />
+        <link rel="shortcut icon" href="./favicons/favicon.ico" />
+        <meta name="msapplication-config" content="./favicons/browserconfig.xml" />
+        <meta name="theme-color" content="#8b5adc" />
+        <script src="./js/lib/easeljs.min.js"></script>
+        <script src="./js/lib/preloadjs-0.6.2.min.js"></script>
+        <script src="./js/lib/jquery.min.js"></script>
+        <script src="service-worker.js"></script>
+        <script src="scripts/luxon-1.11.4.js"></script>
+        <script src="scripts/install.js"></script>
+        <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.3/jquery-ui.min.js"></script>
+        <script src="./js/lib/seedrandom.min.js"></script>
+        <script src="./js/lib/socket.io-1.4.5.js"></script>
+        <script src="./js/lib/speakjs/speakClient.js"></script>
+        <script src="./js/lib/mespeak.js"></script>
+        <script src="./js/lib/espeak/espeak.js"></script>
+        <script src="./js/lib/samjs.min.js"></script>
+        <script src="./js/lib/espeak/espeak.worker.js"></script>
+        <script src="./js/lib/autostartjs"></script>
+        <script type="text/javascript" id="www-widgetapi-script" src="https://s.ytimg.com/yts/jsbin/www-widgetapi-vflS50iB-/www-widgetapi.js" async=""></script>
+        <script src="js/sam.js"></script>
+        <script src="js/bootstrap.min.js"></script>
+        <script src="https://www.youtube.com/player_api"></script>
+        <script src="./js/lib/jquery.contextMenu.min.js"></script>
+        <script src="./cordova.js"></script>
+        <script src="./js/platform.js"></script>
+        <link rel="stylesheet" type="text/css" href="./css/platform.css" />
+		<link rel="stylesheet" href="https://unpkg.com/purecss@2.0.6/build/pure-min.css" integrity="sha384-Uu6IeWbM+gzNVXJcM9XV3SohHtmWE+3VGi496jvgX1jyvDTXfdK+rfZc8C1Aehk5" crossorigin="anonymous">
+        <script src="./js/script.min.js"></script>
+        <script src="./js/platform.js"></script>
+        <script src="./js/warning.js"></script>
+        <script src="./js/css.js"></script>
+        <script src="./js/ban.js"></script>
+		<style>
+				.windows8 {
+					position: relative;
+					width: 26px;
+					height:26px;
+					margin:auto;
+				}
+
+				.windows8 .wBall {
+					position: absolute;
+					width: 26px;
+					height: 26px;
+					opacity: 0;
+					transform: rotate(255deg);
+						-o-transform: rotate(225deg);
+						-ms-transform: rotate(225deg);
+						-webkit-transform: rotate(225deg);
+						-moz-transform: rotate(225deg);
+					animation: orbit 6.96s infinite;
+						-o-animation: orbit 6.96s infinite;
+						-ms-animation: orbit 6.96s infinite;
+						-webkit-animation: orbit 6.96s infinite;
+						-moz-animation: orbit 6.96s infinite;
+				}
+
+				.windows8 .wBall .wInnerBall{
+					position: absolute;
+					width: 4px;
+					height: 4px;
+					background: rgb(255,255,255);
+					left:0px;
+					top:0px;
+					border-radius: 10px;
+				}
+
+				.windows8 #wBall_1 {
+					animation-delay: 1.52s;
+						-o-animation-delay: 1.52s;
+						-ms-animation-delay: 1.52s;
+						-webkit-animation-delay: 1.52s;
+						-moz-animation-delay: 1.52s;
+				}
+
+				.windows8 #wBall_2 {
+					animation-delay: 0.3s;
+						-o-animation-delay: 0.3s;
+						-ms-animation-delay: 0.3s;
+						-webkit-animation-delay: 0.3s;
+						-moz-animation-delay: 0.3s;
+				}
+
+				.windows8 #wBall_3 {
+					animation-delay: 0.61s;
+						-o-animation-delay: 0.61s;
+						-ms-animation-delay: 0.61s;
+						-webkit-animation-delay: 0.61s;
+						-moz-animation-delay: 0.61s;
+				}
+
+				.windows8 #wBall_4 {
+					animation-delay: 0.91s;
+						-o-animation-delay: 0.91s;
+						-ms-animation-delay: 0.91s;
+						-webkit-animation-delay: 0.91s;
+						-moz-animation-delay: 0.91s;
+				}
+
+				.windows8 #wBall_5 {
+					animation-delay: 1.22s;
+						-o-animation-delay: 1.22s;
+						-ms-animation-delay: 1.22s;
+						-webkit-animation-delay: 1.22s;
+						-moz-animation-delay: 1.22s;
+				}
+
+
+
+				@keyframes orbit {
+					0% {
+						opacity: 1;
+						z-index:99;
+						transform: rotate(180deg);
+						animation-timing-function: ease-out;
+					}
+
+					7% {
+						opacity: 1;
+						transform: rotate(300deg);
+						animation-timing-function: linear;
+						origin:0%;
+					}
+
+					30% {
+						opacity: 1;
+						transform:rotate(410deg);
+						animation-timing-function: ease-in-out;
+						origin:7%;
+					}
+
+					39% {
+						opacity: 1;
+						transform: rotate(645deg);
+						animation-timing-function: linear;
+						origin:30%;
+					}
+
+					70% {
+						opacity: 1;
+						transform: rotate(770deg);
+						animation-timing-function: ease-out;
+						origin:39%;
+					}
+
+					75% {
+						opacity: 1;
+						transform: rotate(900deg);
+						animation-timing-function: ease-out;
+						origin:70%;
+					}
+
+					76% {
+					opacity: 0;
+						transform:rotate(900deg);
+					}
+
+					100% {
+					opacity: 0;
+						transform: rotate(900deg);
+					}
+				}
+		</style>
+    </head>
+    <body>
+        <!-- Stop looking for our secrets! Don't reveal to anybody! If you show our users our secrets, then we will be all dooomed!!! -->
+        <audio id="error" src="no_good.ogg"></audio> <audio id="startup" src="startup.wav"></audio> <audio id="go_button" src="START.WAV"></audio>
+        <div id="content" style="height: 941px;">
+            <style id="theme"></style>
+            <div id="news"></div>
+            <div id="room_info">
+                Room ID: <span id="room_id">???</span><br />
+                <span id="room_public">This room is public.</span> <span id="room_private">This room is private.</span>
+                <span id="room_owner">
+                    <br />
+                    You are the owner of this room.
+                </span>
+				<br>
+				<p id="msg" name="msg" style="display: none;"></p>
+				<select name="voice" id="voice" style="display: none;"></select>
+                <br />
+                <big><a href="https://www.cdc.gov/coronavirus/2019-ncov/index.html">Wash your hands!</a></big>
+				<br>
+				<big><big><a href="./beta-test" style="text-decoration: none; color: inherit;"><big>Try out our Brand NEW Beta Redesign!</big> <p hidden>based off Bonzi.world design</p></a></big></big>
+            </div>
+            <canvas id="bonzi_canvas" width="859" height="941"></canvas>
+            <div id="main"></div>
+            <table id="chat_bar">
+                <tbody>
+                    <tr>
+                        <td id="chat_send">send</td>
+                        <td id="chat_message_cont">
+                            <input id="chat_message" list="chat_commands" type="text" placeholder="Enter a message" />
+                            <datalist id="chat_commands">
+                                <option label="/triggered - Say some copypasta" value="/triggered."></option>
+                                <option label="/asshole [text] - Call someone an asshole" value="/asshole fuG"></option>
+                                <option label="/youtube [video id] - Play a video." value="/youtube PD5HfM3DZt8"></option>
+                                <option label="/xp_mode - Enables Legacy Theme of XP Mode" value="/xp_mode"></option>
+                                <option label="/unxp_mode - Disables Legacy Theme of XP Mode" value="/unxp_mode"></option>
+                                <option label="/color [color] - Change your colour." value="/color clippy"></option>
+                                <option label="/speed [number] - Change your speed." value="/speed 100"></option>
+                                <option label="/pitch [number] - Change your pitch." value="/pitch 80"></option>
+                            </datalist>
+                        </td>
+                        <td id="chat_tray"><div id="btn_tile" class="tray_btn"></div></td>
+                    </tr>
+                </tbody>
+            </table>
+            <div id="page_login" class="page">
+                <div id="login_apps"></div>
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                <div id="login_readme">
+                    <font face="Verdana, Arial, Helvetica" size="3">
+                        <h3><a href="https://www.cdc.gov/coronavirus/2019-ncov/index.html">COVID-19 Information</a></h3>
+                        <a href="/msagents/home"><h1>Microsoft Agent Home</h1></a>
+                        <hr />
+                        <!--- <a href="./sapi4"><img src="http://web.archive.org/web/20050121045425im_/http://www.microsoft.com/msagent/images/download_icon.gif" width="16" height="20" border="0" />SAPI4 Beta</a><br /> --->
+                        <a href="./beta-test"><big><big>Brand NEW Beta Redesign!</big></big> <p hidden>based off Bonzi.world design</p></a>
+                    </font>
+                    <br />
+                </div>
+                <div id="login_load" style="">
+					loading
+                    <div class="windows8">
+						<div class="wBall" id="wBall_1">
+							<div class="wInnerBall"></div>
+						</div>
+						<div class="wBall" id="wBall_2">
+							<div class="wInnerBall"></div>
+						</div>
+						<div class="wBall" id="wBall_3">
+							<div class="wInnerBall"></div>
+						</div>
+						<div class="wBall" id="wBall_4">
+							<div class="wInnerBall"></div>
+						</div>
+						<div class="wBall" id="wBall_5">
+							<div class="wInnerBall"></div>
+						</div>
+					</div>
+                </div>
+                <div id="login_version">Version 2.3.1</div>
+                <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+                <div id="login_social">
+                    <a href="https://www.youtube.com/channel/UCAuQXHCXS0mAKb8gXHvjnEg" class="fa fa-youtube"></a><a href="https://github.com/Seamusmario/BonziWORLD-Revived" class="fa fa-github"></a>
+                    <a href="https://twitter.com/bwremastered" class="fa fa-twitter"></a>
+                </div>
+                <div id="login_card" style="display: none;">
+                    <input id="login_name" type="text" placeholder="Nickname" /> <input id="login_room" list="login_rooms" type="text" placeholder="Room ID" />
+                    <datalist id="login_rooms">
+                        <option value="default"></option>
+                        <option value="news"></option>
+                        <option value="js-room"></option>
+                        <option value="BonziWORLD-Reacts"></option>
+                    </datalist>
+                    <button onclick="login()" style="color: transparent; background-color: transparent; border-color: transparent; cursor: default;"><div id="login_go"></div></button> <br />
+                    <br />
+                    <br />
+                    <br />
+                    <br />
+                    <div id="login_error" style="display: none;"></div>
+                    <br />
+                </div>
+            </div>
+        </div>
+        <div id="page_error" class="page" style="display: none;">
+            <div id="error_cont" class="message_cont">
+                <img src="./img/error/logo.png" /><br />
+                <br />
+                <h1>BonziWORLD.exe has encountered an error and needs to close.</h1>
+                <br />
+                Nah, but seriously there was an error and you got disconnected from the server. Chances are, your internet just died out for a brief moment or your device went to sleep. Otherwise the server just screwed up.<br />
+                <br />
+                Try and reload the page. If that doesn't work and your internet is okay, then panic. We'll probably be back up Soon™ though.<br />
+                <a href="#" onclick="window.location.reload()">Reload?</a><br />
+                <br />
+                Room ID: <span id="room_id">???</span><br />
+            </div>
+        </div>
+        <div id="page_dm" class="message_cont" style="display: none;">
+            <h1>Message <span id="dm_send_to"></span></h1>
+            <br />
+            <b>Message: </b><input id="dm_input" /><br />
+            <input type="hidden" id="dm_guid" /><br />
+            <button onclick="dm_send()">Send</button>
+        </div>
+        <div id="page_jserror" class="page" style="display: none;">
+            <div id="error_cont2" class="message_cont">
+                <img src="./img/ban/logo.png" /><br />
+                <br />
+                <h1>Unexpected Error</h1>
+                <br />
+                Inspect Element is disabled.<br />
+                © Seamus's Server - All rights reserved <br />
+                <a href="#" onclick="window.location.reload()">Reload?</a><br />
+                <br />
+                Room ID: <span id="room_id">???</span><br />
+            </div>
+        </div>
+        <div id="page_warning" class="page" style="display: none;">
+            <div id="warning_cont" class="message_cont">
+                <img src="./img/ban/logo.png" /><br />
+                <br />
+                <h1>Warning</h1>
+                <br />
+                <br />
+                <b>Why did i get warned? </b><span id="warning_reason"></span><br />
+                <br />
+                <button onclick="hidewarning()">Hide</button>
+            </div>
+        </div>
+        <div id="page_achieve" class="page" style="display: none;">
+            <div id="achieve_cont" class="message_cont">
+                <img src="./img/logon/key.png" /><br />
+                <br />
+                <h1>You've have earned the Pope Role!</h1>
+                <br />
+                <br />
+                <b>Why did i get admin? </b><span id="achieve_reason"></span><br />
+                <br />
+                If you did not receive admin, reload the page.<br />
+                <br />
+                <button onclick="hideadmin()">Hide</button>
+            </div>
+        </div>
+        <div id="page_ban" class="page" style="display: none;">
+            <div id="ban_cont" class="message_cont">
+                <img src="./img/ban/logo.png" /><br />
+                <br />
+                <h1>You have been banned.</h1>
+                <br />
+                <br />
+                <b>Why though? </b><span id="ban_reason"></span><br />
+                <b>When will the ban expire? </b><span id="ban_end"></span><br />
+            </div>
+        </div>
+        <div id="page_banmenu" class="page" style="display: none;">
+            <div id="ban_cont" class="message_cont">
+                <br />
+                <br />
+                <h1>Ban a user</h1>
+                <br />
+                <br />
+                <b>Why? </b><span>Custom</span><br />
+                <input type="text" id="banmenu_reason" /><br />
+                <b>Who? (IP Only for now)</b><br />
+                <input type="text" id="banmenu_ip" /><br />
+                <br />
+                <b>When is it over? </b><input type="text" id="banmenu_end" /><br />
+                <button onclick="ban()">Ban</button>
+            </div>
+        </div>
+        <div id="page_reportmenu" class="page" style="display: none;">
+            <div id="report_cont" class="message_cont">
+                <img src="./img/error/logo2.png" /> <br />
+                <br />
+                <h1>Report Bonzi (Abuse will result in punishment)</h1>
+                <br />
+                <br />
+                <b>Why? </b><br />
+                <input type="text" id="reportmenu_reason" /><br />
+                <b>Who?</b><br />
+                <input type="text" id="reportmenu_name" /><br />
+                <br />
+                <b>THIS WONT WORK. DON'T TRY IT.</b><br />
+                <button onclick="report()">Report!</button>
+            </div>
+        </div>
+        <div id="page_kick" class="page" style="display: none;">
+            <div id="kick_cont" class="message_cont">
+                <img src="./img/ban/logo.png" /><br />
+                <br />
+                <h1>You got kicked!</h1>
+                <br />
+                <br />
+                <b>Why? </b><span id="kick_reason"></span><br />
+            </div>
+        </div>
+        <div id="page_unsupp" class="page" style="display: none;">
+            <div id="unsupp_cont" class="message_cont">
+                <img src="./img/error/logo.png" /><br />
+                <br />
+                <h1>BonziWORLD cannot run on this platform.</h1>
+                <br />
+                Unfortunately, BonziWORLD cannot run in this browser for the following reasons:<br />
+                <ul id="unsupp_reasons"></ul>
+                You can try to download a BonziWORLD app that works on your device, or update your browser.
+                <div id="login_apps"></div>
+            </div>
+        </div>
+        <div id="titlebar">
+            <div id="minimize"></div>
+            <div id="maximize"></div>
+            <div id="close"></div>
+        </div>
+        --&gt;
+        <script src="/js/midi.js"></script>
+        <script>
+            // Remove this
+        </script>
+        <script src="http://www.windows93.net/c/libs/codef/codef_core.js"></script>
+        <script src="http://www.windows93.net/c/libs/codef/codef_starfield.js"></script>
+        <script src="http://www.windows93.net/c/libs/codef/codef_gradient.js"></script>
+        <script src="http://www.windows93.net/c/libs/codef/codef_scrolltext.js"></script>
+        <script src="http://www.windows93.net/c/libs/codef/codef_fx.js"></script>
+        <script src="http://www.windows93.net/c/libs/codef/codef_3d.js"></script>
+        <script src="http://www.windows93.net/c/libs/howler.min.js"></script>
+
+        <script>
+            // SAM voice for Program colour
+
+            function PlayWebkit(context, audiobuffer, functionlol) {
+                var source = context.createBufferSource();
+                var soundBuffer = context.createBuffer(1, audiobuffer.length, 22050);
+                var buffer = soundBuffer.getChannelData(0);
+                for (var i = 0; i < audiobuffer.length; i++) buffer[i] = audiobuffer[i];
+                source.buffer = soundBuffer;
+                source.connect(context.destination);
+                source.connect(context.destination);
+                source.start(0);
+                source.onended = functionlol;
+            }
+
+            function PlayMozilla(context, audiobuffer) {
+                var written = context.mozWriteAudio(audiobuffer);
+                var diff = audiobuffer.length - written;
+                if (diff <= 0) return;
+                var buffer = new Float32Array(diff);
+                for (var i = 0; i < diff; i++) buffer[i] = audiobuffer[i + written];
+                window.setTimeout(function () {
+                    PlayMozilla(context, buffer);
+                }, 500);
+                buffer.onended = functionlol;
+            }
+
+            function PlayBuffer(audiobuffer, functionlol) {
+                if (typeof AudioContext !== "undefined") {
+                    PlayWebkit(new AudioContext(), audiobuffer, functionlol);
+                } else if (typeof webkitAudioContext !== "undefined") {
+                    PlayWebkit(new webkitAudioContext(), audiobuffer, functionlol);
+                } else if (typeof Audio !== "undefined") {
+                    var context = new Audio();
+                    context.mozSetup(1, 22050);
+                    PlayMozilla(context, audiobuffer);
+                }
+            }
+
+            function Speak(text, functionlol) {
+                //alert(text);
+
+                var input = text;
+                while (input.length < 256) input += " ";
+                var ptr = allocate(intArrayFromString(input), "i8", ALLOC_STACK);
+                _TextToPhonemes(ptr);
+                //alert(Pointer_stringify(ptr));
+                _SetInput(ptr);
+                _Code39771();
+
+                var bufferlength = Math.floor(_GetBufferLength() / 50);
+                var bufferptr = _GetBuffer();
+
+                audiobuffer = new Float32Array(bufferlength);
+
+                for (var i = 0; i < bufferlength; i++) audiobuffer[i] = ((getValue(bufferptr + i, "i8") & 0xff) - 128) / 256;
+                PlayBuffer(audiobuffer, functionlol);
+            }
+        </script>
+
+        <script>
+            var mycanvas;
+            var my2dstarfield;
+            var my2dstarsparams = [
+                { nb: 30, speedy: 2, speedx: -1, params: 0 },
+                { nb: 30, speedy: 0.8, speedx: 0.8, params: 1 },
+                { nb: 30, speedy: 0.6, speedx: 0.6, params: 2 },
+            ];
+
+            var bubble = new Array();
+            //bubble[0]=new image('data/zip.gif');
+            bubble[0] = new image("/dangerous/ban.png");
+            bubble[1] = new image("/dangerous/error.png");
+            bubble[2] = new image("/dangerous/error.png");
+            // not dangerous
+            //bubble[3]=new image('/dangerous/slimey.png');
+
+            var mygrad;
+            var mygradcolor = [
+                { color: "rgb(128,0,128)", offset: 0 },
+                { color: "rgb(255,20,147)", offset: 0.25 },
+                { color: "rgb(128,0,128)", offset: 0.5 },
+                { color: "rgb(255,20,147)", offset: 0.75 },
+                { color: "rgb(128,0,128)", offset: 1 },
+            ];
+
+            var myfont = new image("img/font.png");
+            var mycanvas;
+            var myscrolltext;
+
+            var myscrollparam = [{ myvalue: 0, amp: 125, inc: 0.2, offset: -0.04 }];
+
+            var myimage = new image("/img/acidmode/bg_acid.png");
+            var mycanvas;
+            var myoffscreencanvas;
+            var myfx;
+            var myfxparam = [
+                { value: 0, amp: 30, inc: 0.03, offset: -0.05 },
+                { value: 0, amp: 30, inc: 0.01, offset: 0.08 },
+            ];
+
+            var my3d;
+
+            var myobj = new Array();
+            var myobjvert = new Array();
+            myobjvert = [
+                { x: -300, y: 0, z: 300 },
+                { x: 300, y: 0, z: 300 },
+                { x: 300, y: 0, z: -300 },
+                { x: -300, y: 0, z: -300 },
+                { x: 0, y: 400, z: 0 },
+                { x: 0, y: -400, z: 0 },
+            ];
+
+            myobj = [
+                { p1: 1, p2: 4, p3: 0, params: new MeshBasicMaterial({ color: 0x00ffff, opacity: 0.7 }) },
+                { p1: 2, p2: 4, p3: 1, params: new MeshBasicMaterial({ color: 0xeeeeee, opacity: 0.7 }) },
+                { p1: 3, p2: 4, p3: 2, params: new MeshBasicMaterial({ color: 0xff00ff, opacity: 0.7 }) },
+                { p1: 0, p2: 4, p3: 3, params: new MeshBasicMaterial({ color: 0xeeeeee, opacity: 0.7 }) },
+                { p1: 0, p2: 5, p3: 1, params: new MeshBasicMaterial({ color: 0xeeeeee, opacity: 0.7 }) },
+                { p1: 1, p2: 5, p3: 2, params: new MeshBasicMaterial({ color: 0x00ffff, opacity: 0.7 }) },
+                { p1: 2, p2: 5, p3: 3, params: new MeshBasicMaterial({ color: 0xeeeeee, opacity: 0.7 }) },
+                { p1: 3, p2: 5, p3: 0, params: new MeshBasicMaterial({ color: 0xff00ff, opacity: 0.7 }) },
+            ];
+
+            function init() {
+                window.addEventListener("resize", onWindowResize, false);
+
+                mycanvas = new canvas(window.innerWidth, window.innerHeight, "main");
+                my2dstarfield = new starfield2D_img(mycanvas, bubble, my2dstarsparams);
+                mygrad = new grad(mycanvas, mygradcolor);
+
+                myfont.initTile(32, 32, 32);
+                myscrolltext = new scrolltext_horizontal();
+                myscrolltext.scrtxt = "HELLO AND WELCOME TO        BONZIWORLD ACID MODE        UNEXPECTEDLY HAS DANGEROUS IMAGES :(               WATCH OUT, THEY ARE EXTREMELY DANGEROUS.                           ";
+                myscrolltext.init(mycanvas, myfont, 1, myscrollparam);
+
+                myoffscreencanvas = new canvas(208, 170);
+                myimage.draw(myoffscreencanvas, 0, 0);
+                myfx = new FX(myoffscreencanvas, mycanvas, myfxparam);
+
+                my3d = new codef3D(mycanvas, 900, 40, 1, 1600);
+                my3d.faces(myobjvert, myobj, true, false);
+
+                //sound
+
+                //
+
+                var invisiblepink = new Audio("http://www.windows93.net/c/programs/acidBox93/data/DJ_Invisible_Pink_-_Live_Acid_at_Databit.ogg");
+                invisiblepink.playbackRate = 1.1;
+                invisiblepink.play();
+                invisiblepink.volume = 1;
+                invisiblepink.loop = true;
+                go();
+            }
+
+            function go() {
+                //mycanvas.fill('#000000');
+                mygrad.drawV();
+
+                my3d.group.rotation.x += 0.01;
+                my3d.group.rotation.y += 0.02;
+                my3d.group.rotation.z += 0.04;
+                my3d.draw();
+
+                my2dstarfield.draw();
+
+                myfx.siny(window.innerWidth / 2 - 104, window.innerHeight / 2 - 85);
+
+                myscrolltext.draw(240 - 16);
+
+                requestAnimFrame(go);
+            }
+
+            function onWindowResize() {
+                console.log(mycanvas);
+                //console.log('??');
+                mycanvas.canvas.width = window.innerWidth;
+                mycanvas.canvas.height = window.innerHeight;
+                mycanvas.canvas.style.width = window.innerWidth + "px";
+                mycanvas.canvas.style.height = window.innerHeight + "px";
+
+                //console.log('resize');
+
+                //document.location.reload(true);
+            }
+        </script>
+    </body>
+</html>
