@@ -75,3 +75,8 @@ support = true
 [[ports]]
 localPort = 3000
 externalPort = 80
+
+[[ports]]
+localPort = 8284
+externalPort = 3000
+exposeLocalhost = true

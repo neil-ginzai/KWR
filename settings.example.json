@@ -87,7 +87,7 @@
 			"room_max": 30,
 			"owner": null,
 			"pitch": {
-				"max": 125,
+				"max": 600,
 				"min": 15,
 				"default": "random"
 			},

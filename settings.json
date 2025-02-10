@@ -17,12 +17,14 @@
         "iframe": 0,
         "ban": 3,
         "kick": 3,
+				"nuke": 3,
         "img": 0,
         "image": 0,
         "video": 0,
         "regret": 0,
 				"color": 0,
 				"asshole": 0,
+				"nigger": 0,
 				"triggered": 0,
 				"linux": 0,
 				"pitch": 0,
@@ -39,13 +41,13 @@
 			"room_max": 8,
 			"owner": null,
 			"pitch": {
-				"max": 125,
-				"min": 15,
+				"max": 400,
+				"min": 50,
 				"default": "random"
 			},
 			"speed": {
-				"max": 275,
-				"min": 125,
+				"max": 250,
+				"min": 50,
 				"default": "random"
 			},
 			"defaultName": "Anonymous"
@@ -67,12 +69,14 @@
         "iframe": 0,
         "ban": 3,
         "kick": 3,
+				"nuke": 3,
         "img": 0,
         "regret": 0,
         "image": 0,
         "video": 0,
 				"color": 0,
 				"asshole": 0,
+				"nigger": 0,
 				"triggered": 0,
 				"linux": 0,
 				"pitch": 0,
@@ -89,13 +93,13 @@
 			"room_max": 30,
 			"owner": null,
 			"pitch": {
-				"max": 125,
-				"min": 15,
+				"max": 400,
+				"min": 50,
 				"default": "random"
 			},
 			"speed": {
-				"max": 275,
-				"min": 125,
+				"max": 250,
+				"min": 50,
 				"default": "random"
 			},
 			"defaultName": "Anonymous"
@@ -125,8 +129,6 @@
 		"blue",
 		"green",
 		"red",
-		"black",
-		"brown",
 		"pink"
 	],
 	"banLength": 1440,

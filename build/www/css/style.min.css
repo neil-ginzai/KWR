@@ -13,6 +13,66 @@ body, html {
   left: 0;
   z-index: 999;
 }
+#login_tips {
+  color: #fff;
+  padding: 10px;
+  bottom: 14%;
+  font-size: 16px;
+  width: auto;
+  transform: translateX(-50%);
+  -webkit-transform: translateX(-50%);
+  text-align: left;
+  left: 50%;
+  opacity: 1;
+}
+
+#login_social  {
+  animation: fadeIn 3s;
+    color: #fff;
+    width: 100%;
+    width: 100vw;
+    position: absolute;
+    margin: 0 auto;
+    text-align: center;
+    left: 0px;
+    bottom: 16px;
+}
+@media screen and (max-height: 300px) {
+  #login_readme, #login_tips, #login_version {
+    display: none;
+  }
+}
+@media screen and (max-height: 400px) and (max-width: 560px) {
+  #login_readme, #login_tips {
+    display: none;
+  }
+}
+#login_tips {
+  background-color: #6d33a0;
+  position: absolute;
+  padding: 4px 3px;
+  border: none;
+  border-radius: 3px;
+  box-shadow: 2px 2px 2px #13316f;
+  outline: none;
+  background: #;
+  text-rendering: optimizeLegibility;
+  color: #fff;
+}
+  #login_tips {
+    font-size: 7px;
+    bottom: 5%;
+  }
+  #login_tips {
+    font-size: 9px;
+    bottom: 5%;
+  }
+#login_social a  {
+    color: #FAFAFA;
+}
+#login_social a:visited  {
+    color: #FAFAFA;
+}
 
 .xp_dialog, .message_cont_arcade, .message_cont {
   background: #ffffe1;
@@ -1263,9 +1323,15 @@ body.vaporwave #chat_send:active {
   color: #8c8c8c;
   cursor: default;
 }
+::-moz-selection  {
+    background: #ff75f48c;
+}
+::selection  {
+    background: #ff75f48c;
+}
 
 .context-menu-input.context-menu-hover {
-  background-color: #EEE;
+  background-color: #ff9eea;
   cursor: default;
 }
 
