@@ -84,7 +84,7 @@ $(function () {
     );
   }
   $(".app_showcase").append(
-    '<a href="./">' +
+    '<a href="./classic.html">' +
       '<img src="./img/app/classic.png" alt="Check out the classic version.." />' +
       "</a>"
   );
