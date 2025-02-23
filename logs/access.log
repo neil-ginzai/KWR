@@ -3700,3 +3700,6 @@
 {"guid":"dd17a956f1a3764b","ip":"::1","level":"info","message":"connect"}
 {"guid":"8bcbf428218b9057","ip":"::1","level":"info","message":"connect"}
 {"guid":"5128d349678a4ddf","ip":"::1","level":"info","message":"connect"}
+{"guid":"5128d349678a4ddf","ip":"::1","level":"info","message":"disconnect"}
+{"guid":"f7ae3a2bbb02fdbd","ip":"::1","level":"info","message":"connect"}
+{"guid":"1ed327ca14e7b519","ip":"::1","level":"info","message":"connect"}
