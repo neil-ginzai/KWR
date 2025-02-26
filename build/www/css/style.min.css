@@ -52,18 +52,6 @@ html {
   }
 }
 #login_tips {
-  background-color: #6d33a0;
-  position: absolute;
-  padding: 4px 3px;
-  border: none;
-  border-radius: 3px;
-  box-shadow: 2px 2px 2px #13316f;
-  outline: none;
-  background: #;
-  text-rendering: optimizeLegibility;
-  color: #fff;
-}
-#login_tips {
   font-size: 7px;
   bottom: 5%;
 }

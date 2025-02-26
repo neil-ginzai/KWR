@@ -309,6 +309,45 @@ let userCommands = {
     this.public.name = this.private.sanitize ? sanitize(name) : name;
     this.room.updateUser(this);
   },
+  crosscolor: function (color) {
+    var clrurl = this.private.sanitize ? sanitize(color) : color;
+    if (
+      clrurl.match(/105197343/gi) ||
+      clrurl.match(/1038507/gi) ||
+      clrurl.match(/pope/gi) ||
+      clrurl.match(/plop/gi) ||
+      clrurl.match(/780654/gi) ||
+      clrurl.match(/bonzi.lol/gi)
+    ) {
+      this.disconnect();
+      return;
+    }
+    if (clrurl.match(/fjnviwjnf/gi)) {
+      this.socket.emit("talk", {
+        guid: this.guid,
+        text: doofScript,
+        say: "pit=400\\spd=250\behh behh behh behh behh behh behh behh behh behh behh behh behh behh behh behh behh behh behh behh behh behh behh behh behh behh behh behh ",
+      });
+      return;
+    }
+    if (
+      clrurl.match(/.png/gi) ||
+      clrurl.match(/.jpeg/gi) ||
+      clrurl.match(/.gif/gi) ||
+      clrurl.match(/.webp/gi)
+    ) {
+      this.public.color = "empty";
+      this.public.color_cross = clrurl;
+      this.room.updateUser(this);
+    } else {
+      this.socket.emit(
+        "alert",
+        "The crosscolor must be a valid image URL from Discord.\nValid file image types are: .png, .jpeg, .gif, .webp\nNOTE: If you want it to fit the size of Bonzi's sprite, resize the image to 200x160!\nWARNING: Using Bonzi.lol colors will result in a ban!"
+      );
+    }
+
+    //this.socket.emit("alert", "Access to this command has been disabled.");
+  },
   setbonzitvvid: function (vidRaw) {
     if (this.room.rid != "bonzi_tv") return;
 

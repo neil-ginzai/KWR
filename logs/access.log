@@ -3732,3 +3732,12 @@
 {"guid":"73268b252fa48fca","ip":"::1","level":"info","message":"connect"}
 {"guid":"8019431fead8e094","ip":"::1","level":"info","message":"connect"}
 {"guid":"6ad482fe8b46df55","ip":"::1","level":"info","message":"connect"}
+{"guid":"1afb579b5add7681","ip":"::1","level":"info","message":"connect"}
+{"guid":"1afb579b5add7681","ip":"::1","level":"info","message":"disconnect"}
+{"guid":"27d1001c0b985ab3","ip":"::1","level":"info","message":"connect"}
+{"guid":"27d1001c0b985ab3","ip":"::1","level":"info","message":"disconnect"}
+{"guid":"160248b47e03ef79","ip":"::1","level":"info","message":"connect"}
+{"guid":"160248b47e03ef79","ip":"::1","level":"info","message":"disconnect"}
+{"guid":"80082e99da363b45","ip":"::1","level":"info","message":"connect"}
+{"guid":"80082e99da363b45","ip":"::1","level":"info","message":"disconnect"}
+{"guid":"7cc49d5259290313","ip":"::1","level":"info","message":"connect"}
