@@ -634,6 +634,12 @@ let userCommands = {
       ),
     });
   },
+  startyping: function () {
+    this.room.emit("typing", { guid: this.guid });
+  },
+  stoptyping: function () {
+    this.room.emit("stoptyping", { guid: this.guid });
+  },
   pitch: function (pitch) {
     pitch = parseInt(pitch);
 
@@ -959,12 +965,6 @@ let userCommands = {
       identId: vidId,
     });
   },
-  startyping: function () {
-    this.room.emit("typing", { guid: this.guid });
-  },
-  stoptyping: function () {
-    this.room.emit("stoptyping", { guid: this.guid });
-  },
   setbonzitvvid3: function (vidRaw) {
     if (this.room.rid != "bonzi_tv") return;
 
@@ -1140,19 +1140,6 @@ class User {
       room: rid,
       isOwner: this.room.prefs.owner == this.guid,
       isPublic: roomsPublic.indexOf(rid) != -1,
-    });
-    this.socket.on("voice", function (data) {
-      if (Ban.isMuted(_this.getIp())) return;
-      var newData = data.split(";");
-      newData[0] = "data:audio/ogg;";
-      newData = newData[0] + newData[1];
-
-      _this.public.typing = " is speaking...";
-      _this.room.updateUser(_this);
-      _this.room.emit("send", {
-        sound: newData,
-        guid: _this.guid,
-      });
     });
 
     this.socket.on("talk", this.talk.bind(this));
