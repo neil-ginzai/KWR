@@ -1112,3 +1112,4 @@
 {"guid":"160248b47e03ef79","level":"info","message":"login"}
 {"guid":"80082e99da363b45","level":"info","message":"login"}
 {"guid":"7cc49d5259290313","level":"info","message":"login"}
+{"error":null,"level":"info","message":"banSave"}
