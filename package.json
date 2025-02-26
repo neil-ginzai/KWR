@@ -1,7 +1,7 @@
 {
   "name": "bonziworld_server",
   "version": "2.0.2",
-  "description": "Server for the BonziWORLD chat client.",
+  "description": "Server for teh BonziWORLD chat client.",
   "main": "index.js",
   "author": "Joseph Judge",
   "private": true,

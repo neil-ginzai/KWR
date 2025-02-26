@@ -940,6 +940,52 @@ var _createClass = (function () {
           },
         },
         {
+          key: "updateStatus",
+          value: function (data) {
+            Bonzi_Status = data || "No Status Set";
+            $(function () {
+              $(".bonzi_status").each(function () {
+                if ($(this).html() == "") {
+                  $(this).hide();
+                }
+              });
+            });
+            $(function () {
+              $(".bonzi_status").each(function () {
+                if ($(this).html() == "undefined") {
+                  $(this).hide();
+                }
+              });
+            });
+            $(".bonzi_status:empty").css("display", "none");
+            "" !== data
+              ? (this.$bonzistatus.css("display", "block"),
+                this.$bonzistatus.html(data))
+              : (this.$bonzistatus.css("display", "none"),
+                this.$bonzistatus.html(""));
+          },
+        },
+        {
+          key: "_updateStatus",
+          value: function () {
+            $(function () {
+              $(".bonzi_status").each(function () {
+                if ($(this).html() == "") {
+                  $(this).hide();
+                }
+              });
+            });
+            $(function () {
+              $(".bonzi_status").each(function () {
+                if ($(this).html() == "undefined") {
+                  $(this).hide();
+                }
+              });
+            });
+            $(".bonzi_status:empty").css("display", "none");
+          },
+        },
+        {
           key: "clearDialog",
           value: function () {
             this.$dialogCont.html(""), this.$dialog.hide();

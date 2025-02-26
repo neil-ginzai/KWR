@@ -255,6 +255,29 @@ let userCommands = {
       target: sanitize(Utils.argsString(arguments)),
     });
   },
+  status: function () {
+    let argsString = Utils.argsString(arguments);
+    if (argsString.length > this.room.prefs.status_limit) return;
+    if (argsString.includes("{COLOR}")) {
+      argsString = this.public.color;
+    }
+    if (argsString.includes("{NAME}")) {
+      argsString = sanitizeHTML2(this.public.name);
+    }
+    if (argsString.includes("{ROOM}")) {
+      argsString = sanitizeHTML2(this.room.rid.slice(0, 16));
+    }
+    if (argsString.includes('"')) {
+      return;
+    }
+    if (argsString.includes("'")) {
+      return;
+    }
+
+    let status = argsString;
+    this.public.status = this.private.sanitize ? sanitize(status) : status;
+    this.room.updateUser(this);
+  },
   owo: function () {
     this.room.emit("owo", {
       guid: this.guid,
