@@ -301,6 +301,69 @@ let userCommands = {
     this.socket.emit("unvaporwave");
   },
 
+  image: function (imgRaw) {
+    if (imgRaw.includes('"')) {
+      return;
+    }
+    if (imgRaw.includes("'")) {
+      return;
+    }
+    var img = this.private.sanitize
+      ? sanitize(sanitizeHTML(imgRaw))
+      : sanitizeHTML(imgRaw);
+    this.room.emit("image", {
+      guid: this.guid,
+      img: img,
+      vid: img, // backwards compatibility
+    });
+  },
+  img: function (imgRaw) {
+    if (imgRaw.includes('"')) {
+      return;
+    }
+    if (imgRaw.includes("'")) {
+      return;
+    }
+    var img = this.private.sanitize
+      ? sanitize(sanitizeHTML(imgRaw))
+      : sanitizeHTML(imgRaw);
+    this.room.emit("image", {
+      guid: this.guid,
+      img: img,
+      vid: img, // backwards compatibility
+    });
+  },
+  video: function (vidRaw) {
+    if (vidRaw.includes('"')) {
+      return;
+    }
+    if (vidRaw.includes("'")) {
+      return;
+    }
+    var vid = this.private.sanitize
+      ? sanitize(sanitizeHTML(vidRaw))
+      : sanitizeHTML(vidRaw);
+    this.room.emit("video", {
+      guid: this.guid,
+      vid: vid,
+    });
+  },
+  audio: function (audRaw) {
+    if (audRaw.includes('"')) {
+      return;
+    }
+    if (audRaw.includes("'")) {
+      return;
+    }
+    var aud = this.private.sanitize
+      ? sanitize(sanitizeHTML(audRaw))
+      : sanitizeHTML(audRaw);
+    this.room.emit("audio", {
+      guid: this.guid,
+      aud: aud,
+    });
+  },
+
   name: function () {
     let argsString = Utils.argsString(arguments);
     if (argsString.length > this.room.prefs.name_limit) return;
