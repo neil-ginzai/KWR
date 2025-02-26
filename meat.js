@@ -634,12 +634,7 @@ let userCommands = {
       ),
     });
   },
-  startyping: function () {
-    this.room.emit("typing", { guid: this.guid });
-  },
-  stoptyping: function () {
-    this.room.emit("stoptyping", { guid: this.guid });
-  },
+
   pitch: function (pitch) {
     pitch = parseInt(pitch);
 
@@ -1145,7 +1140,6 @@ class User {
     this.socket.on("talk", this.talk.bind(this));
     this.socket.on("updatebonzitv", this.updatebonzitv.bind(this));
     this.socket.on("setbonzitvtime", this.setbonzitvtime.bind(this));
-    this.socket.on("typing", this.typing.bind(this));
     this.socket.on("command", this.command.bind(this));
     this.socket.on("disconnect", this.disconnect.bind(this));
   }
@@ -1527,7 +1521,6 @@ class User {
     });
 
     this.socket.removeAllListeners("talk");
-    this.socket.removeAllListeners("typing");
     this.socket.removeAllListeners("command");
     this.socket.removeAllListeners("disconnect");
 
