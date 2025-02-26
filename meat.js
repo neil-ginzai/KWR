@@ -959,6 +959,12 @@ let userCommands = {
       identId: vidId,
     });
   },
+  startyping: function () {
+    this.room.emit("typing", { guid: this.guid });
+  },
+  stoptyping: function () {
+    this.room.emit("stoptyping", { guid: this.guid });
+  },
   setbonzitvvid3: function (vidRaw) {
     if (this.room.rid != "bonzi_tv") return;
 
@@ -1444,16 +1450,6 @@ class User {
     }
   }
 
-  typing(typer) {
-    try {
-      let typing = this.public.typing;
-      if (typer.state == 0) this.public.typing = "";
-      else if (typer.state == 1) this.public.typing = " is typing...";
-      else if (typer.state == 2) this.public.typing = " is commanding...";
-
-      this.room.updateUser(this);
-    } catch (exc) {}
-  }
   talk(data) {
     if (typeof data != "object") {
       // Crash fix (issue #9)

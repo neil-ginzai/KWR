@@ -438,7 +438,7 @@ var _createClass = (function () {
         this.$container.append(
           "\n\t\t\t<div id='bonzi_" +
             this.id +
-            "' class='bonzi'>\n\t\t\t\t<div class='bonzi_status' style='display:none'></div><div class='bonzi_user'></span><span class='bonzi_name'></span> </div>\n\t\t\t\t\t<div class='bonzi_placeholder'></div>\n\t\t\t\t<div style='display:none' class='bubble'>\n\t\t\t\t\t<p class='bubble-content'></p>\n\t\t\t\t<i class='fas fa-times' /></div>\n\t\t\t\t</div>\n\t\t\t</div>\n\t\t"
+            "' class='bonzi'>\n\t\t\t\t<div class='bonzi_status' style='display:none'></div><div class='bonzi_user'></span><span class='bonzi_name'></span> <i class='typing' hidden>(typing)</i></div>\n\t\t\t\t\t<div class='bonzi_placeholder></div><div style='display:none' class='bubble'>\n\t\t\t\t\t<p class='bubble-content'></p>\n\t\t\t\t<i class='fas fa-times' /></div>\n\t\t\t\t</div>\n\t\t\t</div>\n\t\t"
         ),
         (this.selElement = "#bonzi_" + this.id),
         (this.selDialog = this.selElement + " > .bubble"),
