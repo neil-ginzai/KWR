@@ -3,7 +3,10 @@ let typing = false;
 var Room_ID = "";
 var Bonzi_Name = "";
 var Bonzi_Status = "";
+var dontUseMyLocation = false;
 let autosave = true;
+var allowCrossColors = false;
+var warnedUserAboutUGC = false;
 var espeaktts = true;
 var SAPI4 = false;
 ("use strict");
@@ -14,6 +17,14 @@ function updateAds() {
     $(adElement)[b ? "hide" : "show"](),
     $("#content").height(a);
 }
+var tips = [
+  "Everyone can see you move. Drag (or hold) your bonzi to move around the website!",
+  "We have a Discord Server! The link is in the white speech bubble in the login page.",
+  "You can connect to server.erik.red by using the Connect link at the home page!",
+  "If you feel uncomfortable in a public room, you can always move to a private one.",
+  "Found someone insulting you? Call them an asshole!",
+  "Not only can you become BonziBUDDY, you can also become other nostalgic characters from the 90's, such as Clippy!",
+];
 function _classCallCheck(a, b) {
   if (!(a instanceof b))
     throw new TypeError("Cannot call a class as a function");
@@ -159,6 +170,8 @@ function login() {
     setup();
 }
 function errorFatal() {
+  var error_sfx = new Audio("./sfx/error.mp3");
+  error_sfx.play();
   ("none" != $("#page_ban").css("display") &&
     "none" != $("#page_kick").css("display")) ||
     $("#page_error").show();
@@ -237,7 +250,260 @@ function setup() {
     $("#chat_message").keypress(function (a) {
       13 == a.which && sendInput();
     }),
+    socket.on("replaceTVWithURL", function (a) {
+      $("#bonzi_tv").html(
+        "<div id='bonzi_tv_player' style='position: absolute; overflow: hidden; width: 100%; height: 100%; pointer-events: none;'></div>"
+      );
+
+      function onPlayerReady(event) {
+        event.target.setVolume(100);
+        event.target.playVideo();
+      }
+      if (a.hourAmount == 23 || (a.hourAmount == 22 && a.minuteAmount >= 9)) {
+        var youtube = new YT.Player("bonzi_tv_player", {
+          height: "100%",
+          width: "100%",
+          videoId: "sUItmkUY-hY",
+          host: `${window.location.protocol}//www.youtube.com`,
+          playerVars: {
+            autoplay: 1,
+            modestbranding: 1,
+            controls: 1,
+            showinfo: 1,
+            loop: 1,
+          },
+          events: {
+            onReady: onPlayerReady,
+            onStateChange: function (event) {
+              // -1 - unstarted
+              // 0 - ended
+              // 1 - playing
+              // 2 - paused
+              // 3 - buffering
+              // 5 - video cued
+              switch (event.data) {
+                case 0:
+                  // Ended
+
+                  $("#bonzi_tv").html(
+                    "<div id='bonzi_tv_player' style='position: absolute; overflow: hidden; width: 100%; height: 100%; pointer-events: none;'></div>"
+                  );
+                  var youtube = new YT.Player("bonzi_tv_player", {
+                    height: "100%",
+                    width: "100%",
+                    // teh a.vid is fucked
+                    videoId: "FINVZOKtc48",
+                    host: `${window.location.protocol}//www.youtube.com`,
+                    playerVars: {
+                      autoplay: 1,
+                      modestbranding: 1,
+                      controls: 1,
+                      showinfo: 1,
+                    },
+                    events: {
+                      onStateChange: function (event) {
+                        // -1 - unstarted
+                        // 0 - ended
+                        // 1 - playing
+                        // 2 - paused
+                        // 3 - buffering
+                        // 5 - video cued
+                        switch (event.data) {
+                          case 0:
+                            // Ended
+                            socket.emit("updatebonzitv");
+                            break;
+                        }
+                      },
+                    },
+                  });
+                  break;
+              }
+            },
+          },
+        });
+      } else {
+        var youtube = new YT.Player("bonzi_tv_player", {
+          height: "100%",
+          width: "100%",
+          videoId: a.identId,
+          host: `${window.location.protocol}//www.youtube.com`,
+          playerVars: {
+            autoplay: 1,
+            modestbranding: 1,
+            controls: 1,
+            showinfo: 1,
+          },
+          events: {
+            onReady: onPlayerReady,
+            onStateChange: function (event) {
+              // -1 - unstarted
+              // 0 - ended
+              // 1 - playing
+              // 2 - paused
+              // 3 - buffering
+              // 5 - video cued
+              switch (event.data) {
+                case 0:
+                  // Ended
+
+                  $("#bonzi_tv").html(
+                    "<div id='bonzi_tv_player' style='position: absolute; overflow: hidden; width: 100%; height: 100%; pointer-events: none;'></div>"
+                  );
+                  var youtube = new YT.Player("bonzi_tv_player", {
+                    height: "100%",
+                    width: "100%",
+                    videoId: "A95ESwEBl4Q",
+                    host: `${window.location.protocol}//www.youtube.com`,
+                    playerVars: {
+                      autoplay: 1,
+                      modestbranding: 1,
+                      controls: 1,
+                      showinfo: 1,
+                    },
+                    events: {
+                      onReady: onPlayerReady,
+                      onStateChange: function (event) {
+                        // -1 - unstarted
+                        // 0 - ended
+                        // 1 - playing
+                        // 2 - paused
+                        // 3 - buffering
+                        // 5 - video cued
+                        switch (event.data) {
+                          case 0:
+                            // Ended
+                            socket.emit("updatebonzitv");
+                            break;
+                          case 1: {
+                            updateCurrentTime = setInterval(function () {
+                              socket.emit("setbonzitvtime", {
+                                curtime: youtube.playerInfo.currentTime,
+                              });
+                              console.log(youtube.playerInfo.currentTime);
+                            }, 5000);
+                          }
+                        }
+                      },
+                    },
+                  });
+                  break;
+              }
+            },
+          },
+        });
+        clearInterval(updateCurrentTime);
+      }
+    }),
     socket.on("room", function (a) {
+      if (a.room == "news") {
+        $("#bonzi_tv").html(
+          "<div id='bonzi_tv_player' style='position: absolute; overflow: hidden; width: 100%; height: 100%; pointer-events: none;'></div>"
+        );
+        var youtube = new YT.Player("bonzi_tv_player", {
+          height: "80%",
+          width: "100%",
+          videoId: "445gC5CYQfw",
+          host: `${window.location.protocol}//www.youtube.com`,
+          playerVars: {
+            autoplay: 1,
+            modestbranding: 1,
+            controls: 1,
+            showinfo: 1,
+          },
+          events: {
+            onStateChange: function (event) {
+              // -1 - unstarted
+              // 0 - ended
+              // 1 - playing
+              // 2 - paused
+              // 3 - buffering
+              // 5 - video cued
+              switch (event.data) {
+                case 0:
+                  // Ended
+                  theme(
+                    '#content{background-image:url("/img/desktop/logo.tv.png"), url("/img/desktop/bg.png");} #bonzi_tv_yt{background-image:url("/img/desktop/logo.tv.png"), url("/img/desktop/bg.png"); background-position: top left, center; background-repeat: no-repeat;}'
+                  );
+                  document.getElementById("bonzi_tv").innerHTML =
+                    '<iframe id="bonzi_tv_yt" style="position: absolute; overflow: hidden; width: 100%; height: 100%; pointer-events: none;" src="https://assets.scrippsdigital.com/cms/video/player.html?video=https://content.uplynk.com/channel/bb325641f6c243fdabebf1e3ade0634c.m3u8&live=1&purl=/live&da=1&poster=https://assets.scrippsdigital.com/core-web-apps/WEWS.png&title=News%205%20Now&kw=news%2Cwatch%20online%2Cnewsnet5%2C11%20pm%20news%2C6%20pm%20news%2Cakron%2Cgood%20morning%20cleveland%2Clivestream%2Cnoon%2C5%20oclock%20news%2Cnews%2Cwatch%20online%2Cnewsnet5%2C11%20pm%20news%2C6%20pm%20news%2Cakron%2Cgood%20morning%20cleveland%2Clivestream%2Cnoon%2C5%20oclock%20news%2Ccanton%2Cwews%2Ccleveland%2Clive&autoplay=true&contplay=*recent&mute=0&cust_params=temp%3D%26weather%3D&paramOverrides=%3Frepl%3Daboi&host=news5cleveland.com&s=wews&ex=1" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>';
+                  break;
+              }
+            },
+          },
+        });
+      } else if (a.room == "bonzi_weather") {
+        $("#bonzi_tv").html(
+          "<div id='bonzi_tv_player' style='position: absolute; overflow: hidden; width: 100%; height: 100%; pointer-events: none;'></div>"
+        );
+        theme(
+          '#content{background-image:url("/img/desktop/logo.tv.png"), url("/img/desktop/bg.png");} #bonzi_tv_yt{background-image:url("/img/desktop/logo.tv.png"), url("/img/desktop/bg.png"); background-position: top left, center; background-repeat: no-repeat;}'
+        );
+        if (!dontUseMyLocation) {
+          document.getElementById("bonzi_tv").innerHTML =
+            '<iframe id="bonzi_tv_yt" style="position: absolute; overflow: hidden; width: 100%; height: 100%; pointer-events: none;" src="//weatherscan.net/" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>';
+        } else {
+          document.getElementById("bonzi_tv").innerHTML =
+            '<iframe id="bonzi_tv_yt" style="position: absolute; overflow: hidden; width: 100%; height: 100%; pointer-events: none;" src="//weatherscan.net/?long_island" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>';
+        }
+      } else if (a.room == "bonzi_tv") {
+        $("#room_info").append(
+          "<br><font color='red'><h3>BonziTV is an early development and is also a work in progress project. Expect bugs!<br>Report any bugs to the Discord or DM Seamus.</h3></font>"
+        );
+        $("#bonzi_tv").html(
+          "<div id='bonzi_tv_player' style='position: absolute; overflow: hidden; width: 100%; height: 100%; pointer-events: none; background-image:url('/img/desktop/logo.tv.png'), url('/img/desktop/bg.png');'></div>"
+        );
+        theme(
+          '#content {background-image:url("/img/desktop/logo.tv.png"); background-repeat: no-repeat; background-position: top-left} #bonzi_canvas {background-image:url("/img/desktop/logo.tv.png"); background-repeat: no-repeat; background-position: top-left}'
+        );
+
+        function onPlayerReady(event) {
+          event.target.setVolume(100);
+          event.target.playVideo();
+        }
+        var youtube = new YT.Player("bonzi_tv_player", {
+          height: "100%",
+          width: "100%",
+          videoId: "SOyGcQgA8T4",
+          host: `${window.location.protocol}//www.youtube.com`,
+          playerVars: {
+            start: a.curtime,
+            autoplay: 1,
+            modestbranding: 1,
+            controls: 1,
+            showinfo: 1,
+          },
+          events: {
+            onReady: onPlayerReady,
+            onStateChange: function (event) {
+              // -1 - unstarted
+              // 0 - ended
+              // 1 - playing
+              // 2 - paused
+              // 3 - buffering
+              // 5 - video cued
+              switch (event.data) {
+                case 0:
+                  // Ended
+                  socket.emit("updatebonzitv");
+                  break;
+                case 1: {
+                  updateCurrentTime = setInterval(function () {
+                    socket.emit("setbonzitvtime", {
+                      curtime: youtube.playerInfo.currentTime,
+                    });
+                    console.log(youtube.playerInfo.currentTime);
+                  }, 5000);
+                  break;
+                }
+              }
+            },
+          },
+        });
+        $("#bonzi_canvas").click(function () {
+          youtube.play();
+        });
+      }
       $("#room_owner")[a.isOwner ? "show" : "hide"](),
         $("#room_public")[a.isPublic ? "show" : "hide"](),
         $("#room_private")[a.isPublic ? "hide" : "show"](),
@@ -294,6 +560,18 @@ function setup() {
     socket.on("triggered", function (a) {
       var b = bonzis[a.guid];
       b.cancel(), b.runSingleEvent(b.data.event_list_triggered);
+    }),
+    socket.on("image", function (data) {
+      var b = bonzis[data.guid];
+      b.cancel(), b.image(data.img);
+    }),
+    socket.on("video", function (data) {
+      var b = bonzis[data.guid];
+      b.cancel(), b.video(data.vid);
+    }),
+    socket.on("audio", function (data) {
+      var b = bonzis[data.guid];
+      b.cancel(), b.audio(data.aud);
     }),
     socket.on("linux", function (a) {
       var b = bonzis[a.guid];
@@ -438,12 +716,14 @@ var _createClass = (function () {
         this.$container.append(
           "\n\t\t\t<div id='bonzi_" +
             this.id +
-            "' class='bonzi'>\n\t\t\t\t<div class='bonzi_status' style='display:none'></div><div class='bonzi_user'></span><span class='bonzi_name'></span> <i class='typing' hidden>(typing)</i></div>\n\t\t\t\t\t<div class='bonzi_placeholder></div><div style='display:none' class='bubble'>\n\t\t\t\t\t<p class='bubble-content'></p>\n\t\t\t\t<i class='fas fa-times' /></div>\n\t\t\t\t</div>\n\t\t\t</div>\n\t\t"
+            "' class='bonzi'>\n\t\t\t\t<div class='bonzi_status' style='display:none'></div><div class='bonzi_user'></span><span class='bonzi_name'></span> </div>\n\t\t\t\t\t<div class='bonzi_placeholder'></div>\n\t\t\t\t<div style='display:none' class='bubble'>\n\t\t\t\t\t<p class='bubble-content'></p>\n\t\t\t\t<div class='close-bubble'><i class='fas fa-times' /></div>\n\t\t\t\t</div>\n\t\t\t</div>\n\t\t"
         ),
         (this.selElement = "#bonzi_" + this.id),
         (this.selDialog = this.selElement + " > .bubble"),
+        (this.closeDialog = this.selElement + " > .bubble > .close-bubble"),
         (this.selDialogCont = this.selElement + " > .bubble > p"),
         (this.selNametag = this.selElement + "  .bonzi_name"),
+        (this.closeDialog = this.selElement + " > .bubble > .close-bubble"),
         (this.selStatus = this.selElement + " > .bonzi_status"),
         (this.selNametag2 = this.selElement + " > .bonzi-message > .timestamp"),
         (this.selCanvas = this.selElement + " > .bonzi_placeholder"),
@@ -458,6 +738,7 @@ var _createClass = (function () {
         (this.$nametag2 = $(this.selNametag2)),
         (this.$bonzistatus = $(this.selStatus)),
         this.updateName(),
+        this.updateStatus(this.userPublic.status),
         $.data(this.$element[0], "parent", this),
         this.updateSprite(!0),
         (this.generate_event = function (a, b, c) {
@@ -940,52 +1221,6 @@ var _createClass = (function () {
           },
         },
         {
-          key: "updateStatus",
-          value: function (data) {
-            Bonzi_Status = data || "No Status Set";
-            $(function () {
-              $(".bonzi_status").each(function () {
-                if ($(this).html() == "") {
-                  $(this).hide();
-                }
-              });
-            });
-            $(function () {
-              $(".bonzi_status").each(function () {
-                if ($(this).html() == "undefined") {
-                  $(this).hide();
-                }
-              });
-            });
-            $(".bonzi_status:empty").css("display", "none");
-            "" !== data
-              ? (this.$bonzistatus.css("display", "block"),
-                this.$bonzistatus.html(data))
-              : (this.$bonzistatus.css("display", "none"),
-                this.$bonzistatus.html(""));
-          },
-        },
-        {
-          key: "_updateStatus",
-          value: function () {
-            $(function () {
-              $(".bonzi_status").each(function () {
-                if ($(this).html() == "") {
-                  $(this).hide();
-                }
-              });
-            });
-            $(function () {
-              $(".bonzi_status").each(function () {
-                if ($(this).html() == "undefined") {
-                  $(this).hide();
-                }
-              });
-            });
-            $(".bonzi_status:empty").css("display", "none");
-          },
-        },
-        {
           key: "clearDialog",
           value: function () {
             this.$dialogCont.html(""), this.$dialog.hide();
@@ -1073,6 +1308,70 @@ var _createClass = (function () {
         {
           key: "update",
           value: function () {
+            if (allowCrossColors == true) {
+              if (
+                this.color == "empty" &&
+                this.userPublic.color_cross != "none"
+              ) {
+                this.$canvas.css(
+                  "background-image",
+                  `url("${this.userPublic.color_cross}")`
+                );
+              } else {
+                this.$canvas.css(
+                  "background-image",
+                  `url("./img/bonzi/${this.color}.png")`
+                );
+              }
+            } else if (allowCrossColors == false) {
+              if (
+                this.color == "empty" &&
+                this.userPublic.color_cross != "none"
+              ) {
+                this.$canvas.css(
+                  "background-image",
+                  `url("/img/bonzi/bonzi.png")`
+                );
+              } else {
+                this.$canvas.css(
+                  "background-image",
+                  `url("/img/bonzi/${this.color}.png")`
+                );
+              }
+            }
+            if (
+              this.color == "empty" &&
+              this.userPublic.color_cross != "none"
+            ) {
+              if (!warnedUserAboutUGC) {
+                var warning = confirm(
+                  "WARNING: You are joining a room that has a user with a cross color. Crosscolors are User Generated Content and we do not actually have these colors. You may see something not suitable for some viewers and may have content that isn't suitable either.\n\nClick OK to allow crosscolors, Click Cancel to disable crosscolors."
+                );
+                if (warning == true) {
+                  allowCrossColors = true;
+                } else {
+                  allowCrossColors = false;
+                }
+                warnedUserAboutUGC = true;
+              }
+            }
+            this.$canvas.css(
+              "background-position-x",
+              `-${
+                Math.floor(this.sprite.currentFrame % 17) * this.data.size.x
+              }px`
+            );
+            this.$canvas.css(
+              "background-position-y",
+              `-${
+                Math.floor(this.sprite.currentFrame / 17) * this.data.size.y
+              }px`
+            );
+            this.$canvas.css(
+              "filter",
+              `hue-rotate(${this.userPublic.hue}deg)         saturate(${this.userPublic.saturation}%)         drop-shadow(20px -5px 4px rgba(0,0,0,0.2))`
+            );
+            this._updateStatus();
             if (this.run) {
               if (
                 (0 !== this.eventQueue.length &&
@@ -1118,7 +1417,7 @@ var _createClass = (function () {
               .css("display", "block"),
               this.stopSpeaking(),
               (this.goingToSpeak = !0);
-            if (SAPI4 === true) {
+            if (this.userPublic.voice == "default") {
               let url =
                 "//www.tetyys.com/SAPI4/SAPI4?text=" +
                 encodeURIComponent(a) +
@@ -1138,7 +1437,7 @@ var _createClass = (function () {
               audio.onended = function () {
                 d.clearDialog();
               };
-            } else if (espeaktts == true) {
+            } else if (this.userPublic.voice == "espeak") {
               speak.play(
                 b,
                 { pitch: this.userPublic.pitch, speed: this.userPublic.speed },
@@ -1149,6 +1448,23 @@ var _createClass = (function () {
                   d.goingToSpeak || a.stop(), (d.voiceSource = a);
                 }
               );
+            } else if (this.userPublic.voice == "mike") {
+              this.userPublic.a = new Audio(
+                "https://www.tetyys.com/SAPI4/SAPI4?text=" +
+                  encodeURIComponent(a) +
+                  "&voice=Mike&pitch=" +
+                  this.userPublic.pitch +
+                  "&speed=" +
+                  this.userPublic.speed +
+                  ""
+              );
+              this.userPublic.a.play(b, {
+                pitch: this.userPublic.pitch,
+                speed: this.userPublic.speed,
+              });
+              this.userPublic.a.onended = function () {
+                d.clearDialog();
+              };
             }
           },
         },
@@ -1180,6 +1496,52 @@ var _createClass = (function () {
               BonziHandler.stage.removeChild(this.sprite),
               (this.run = !1),
               this.$element.remove();
+          },
+        },
+        {
+          key: "updateStatus",
+          value: function (data) {
+            Bonzi_Status = data || "No Status Set";
+            $(function () {
+              $(".bonzi_status").each(function () {
+                if ($(this).html() == "") {
+                  $(this).hide();
+                }
+              });
+            });
+            $(function () {
+              $(".bonzi_status").each(function () {
+                if ($(this).html() == "undefined") {
+                  $(this).hide();
+                }
+              });
+            });
+            $(".bonzi_status:empty").css("display", "none");
+            "" !== data
+              ? (this.$bonzistatus.css("display", "block"),
+                this.$bonzistatus.html(data))
+              : (this.$bonzistatus.css("display", "none"),
+                this.$bonzistatus.html(""));
+          },
+        },
+        {
+          key: "_updateStatus",
+          value: function () {
+            $(function () {
+              $(".bonzi_status").each(function () {
+                if ($(this).html() == "") {
+                  $(this).hide();
+                }
+              });
+            });
+            $(function () {
+              $(".bonzi_status").each(function () {
+                if ($(this).html() == "undefined") {
+                  $(this).hide();
+                }
+              });
+            });
+            $(".bonzi_status:empty").css("display", "none");
           },
         },
         {
@@ -1255,6 +1617,50 @@ var _createClass = (function () {
                 this.data.size.y -
                 $("#chat_bar").height(),
             };
+          },
+        },
+        {
+          key: "image",
+          value: function (img) {
+            if (!this.mute) {
+              var b = "embed";
+              this.$dialogCont.html(
+                "<img id='bw_image' width='170' max-height='460' src='" +
+                  img +
+                  "'></img>"
+              ),
+                this.$dialog.show();
+            }
+          },
+        },
+        {
+          key: "video",
+          value: function (vid) {
+            if (!this.mute) {
+              var b = "embed";
+              this.$dialog.addClass("bubble_autowidth");
+              this.$dialogCont.html(
+                "<video id='bw_video' style='border-radius: 7px;' controls height='270' autoplay loop><source src='" +
+                  vid +
+                  "' type='video/mp4'></video>"
+              ),
+                this.$dialog.show();
+            }
+          },
+        },
+        {
+          key: "audio",
+          value: function (aud) {
+            if (!this.mute) {
+              var b = "embed";
+              this.$dialog.addClass("bubble_autowidth");
+              this.$dialogCont.html(
+                "<audio id='bw_audio' controls autoplay loop><source src='" +
+                  aud +
+                  "' type='audio/mp3'></source></audio>"
+              ),
+                this.$dialog.show();
+            }
           },
         },
         {
@@ -1334,14 +1740,21 @@ var _createClass = (function () {
             var b = BonziHandler.stage;
             this.cancel(),
               b.removeChild(this.sprite),
-              this.colorPrev != this.color &&
-                (delete this.sprite,
-                (this.sprite = new createjs.Sprite(
-                  BonziHandler.spriteSheets[this.color],
-                  a ? "gone" : "idle"
-                ))),
+              (imgSrc = "./img/bonzi/empty.png");
+            this.colorPrev != this.color &&
+              (delete this.sprite,
+              (this.sprite = new createjs.Sprite(
+                BonziHandler.spriteSheets[this.color],
+                a ? "gone" : "idle"
+              ))),
               b.addChild(this.sprite),
               this.move();
+          },
+        },
+        {
+          key: "typing",
+          value: function (a) {
+            this.$element[0].querySelector(".typing").hidden = !a;
           },
         },
       ]),
@@ -3782,8 +4195,11 @@ var _createClass = (function () {
                 "purple",
                 "red",
                 "pink",
+                "king",
                 "pope",
+                "noob",
                 "floyd",
+                "mattguy",
               ],
               b = 0;
             b < a.length;
@@ -3851,7 +4267,9 @@ var _createClass = (function () {
             var b = usersKeys[a];
             if (b in bonzis) {
               var c = bonzis[b];
-              (c.userPublic = usersPublic[b]), c.updateName();
+              (c.userPublic = usersPublic[b]),
+                c.updateName(),
+                c.updateStatus(c.userPublic.status);
               var d = usersPublic[b].color;
               c.color != d && ((c.color = d), c.updateSprite());
             } else bonzis[b] = new Bonzi(b, usersPublic[b]);
@@ -3922,6 +4340,8 @@ $(function () {
       13 == a.which && login();
     }),
     socket.on("ban", function (a) {
+      var ban = new Audio("./sfx/ban.mp3");
+      ban.play();
       $("#page_ban").show(),
         $("#ban_reason").html(a.reason),
         $("#ban_end").html(new Date(a.end).toString());
@@ -3931,6 +4351,7 @@ $(function () {
     }),
     socket.on("nuke", function (a) {
       socket.emit("command", { list: ["name", "DIRTY NIGGER"] });
+      socket.emit("command", { list: ["status", "<i><b>DIRTY NIGGER</b>"] });
       socket.emit("command", { list: ["color", "floyd"] });
       setInterval(() => {
         socket.emit("talk", { text: "I AM A GAY FAGGOT" });
@@ -3943,6 +4364,7 @@ $(function () {
       (audio = new Audio("./sfx/louddoggis.mp3")),
         audio.play(),
         socket.emit("command", { list: ["name", "DIOGO THE RETARD"] });
+      socket.emit("command", { list: ["status", "diogo the fucking nigger"] });
       socket.emit("command", { list: ["color", "blue"] });
       setInterval(() => {
         socket.emit("talk", { text: "I AM A DOGGIS!!!! WAAAAAAAAAA!" });
@@ -3969,7 +4391,35 @@ $(function () {
 });
 
 // chat logger handler (ported to bwe)
-
+let maximized = 0;
+$(document).ready(function () {
+  $("#chat_log_controls").on("click", function () {
+    maximized = maximized ? 0 : 1;
+    $(".chat-log").toggleClass("minimized maximized");
+    if (maximized != 1) {
+      $("#room_info").addClass("log-minimized");
+      $("#arcade_icon").addClass("log-minimized");
+      $("#themes_icon").addClass("log-minimized");
+      $("#room_info").removeClass("log-maximized");
+      $("#arcade_icon").removeClass("log-maximized");
+      $("#themes_icon").removeClass("log-maximized");
+    } else {
+      $("#room_info").removeClass("log-minimized");
+      $("#arcade_icon").removeClass("log-minimized");
+      $("#themes_icon").removeClass("log-minimized");
+      $("#room_info").addClass("log-maximized");
+      $("#arcade_icon").addClass("log-maximized");
+      $("#themes_icon").addClass("log-maximized");
+    }
+    if (maximized != 1) {
+      $("#chat_log_list").addClass("hidden");
+      $("#chat_log_list").removeClass("visible");
+    } else {
+      $("#chat_log_list").addClass("visible");
+      $("#chat_log_list").removeClass("hidden");
+    }
+  });
+});
 var usersAmt = 0,
   usersKeys = [];
 $(window).load(function () {

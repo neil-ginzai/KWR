@@ -385,8 +385,7 @@ let userCommands = {
       clrurl.match(/1038507/gi) ||
       clrurl.match(/pope/gi) ||
       clrurl.match(/plop/gi) ||
-      clrurl.match(/780654/gi) ||
-      clrurl.match(/bonzi.lol/gi)
+      clrurl.match(/780654/gi)
     ) {
       this.disconnect();
       return;
@@ -793,6 +792,13 @@ let userCommands = {
       );
     }
   },
+  tts: function (voice) {
+    voice = parseInt(voice);
+
+    this.public.voice = voice;
+
+    this.room.updateUser(this);
+  },
 
   setbonzitvvid: function (vidRaw) {
     if (this.room.rid != "bonzi_tv") return;
@@ -966,6 +972,17 @@ let userCommands = {
       identId: vidId,
     });
   },
+  voice: function (voice) {
+    if (typeof voice != "undefined" && typeof voice == "string") {
+      this.public.voice = voice;
+    } else {
+      this.public.voice =
+        settings.bonziVoices[
+          Math.floor(Math.random() * settings.bonziVoices.length)
+        ];
+    }
+    this.room.updateUser(this);
+  },
   setbonzitvvid3: function (vidRaw) {
     if (this.room.rid != "bonzi_tv") return;
 
@@ -1021,6 +1038,10 @@ class User {
         settings.bonziColors[
           Math.floor(Math.random() * settings.bonziColors.length)
         ],
+      color_cross: "none",
+      voice: "default",
+      hue: 0,
+      saturation: 100,
     };
 
     log.access.log("info", "connect", {
