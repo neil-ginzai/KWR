@@ -3776,7 +3776,15 @@ var _createClass = (function () {
         (this.spriteSheets = {}),
         (this.prepSprites = function () {
           for (
-            var a = ["blue", "green", "purple", "red", "pink", "pope", "floyd"],
+            var a = [
+                "blue",
+                "green",
+                "purple",
+                "red",
+                "pink",
+                "pope",
+                "floyd",
+              ],
               b = 0;
             b < a.length;
             b++

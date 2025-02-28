@@ -39,7 +39,8 @@
                 "video": 0,
                 "audio": 0,
 				"status": 0,
-				"pope": 3
+				"pope": 3,
+				"king": 3
 			},
 			"room_max": 8,
 			"owner": null,
@@ -97,7 +98,8 @@
 				"owo": 0,
 				"status": 0,
 				"sanitize": 3,
-				"pope": 3
+				"pope": 3,
+				"king": 3
 			},
 			"room_max": 30,
 			"owner": null,
@@ -139,7 +141,8 @@
 		"green",
 		"red",
 		"pink",
-		"floyd"
+		"floyd",
+		"noob"
 	],
 	"banLength": 1440,
 	"port": 3000,

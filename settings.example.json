@@ -33,7 +33,8 @@
 				"name": 0,
 				"owo": 0,
 				"sanitize": 3,
-				"pope": 3
+				"pope": 3,
+				"king": 3
 			},
 			"room_max": 8,
 			"owner": null,

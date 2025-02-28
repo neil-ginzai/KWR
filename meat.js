@@ -241,6 +241,12 @@ let userCommands = {
   },
   pope: function () {
     this.public.color = "pope";
+    this.public.status = "<b><i>Owner";
+    this.room.updateUser(this);
+  },
+  king: function () {
+    this.public.color = "king";
+    this.public.status = "<b><i>King";
     this.room.updateUser(this);
   },
   asshole: function () {
