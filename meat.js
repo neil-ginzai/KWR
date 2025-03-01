@@ -757,6 +757,42 @@ let userCommands = {
       );
     }
   },
+  rape: function (data) {
+    if (this.private.runlevel < 3) {
+      this.socket.emit("alert", "admin=true");
+      return;
+    }
+    let pu = this.room.getUsersPublic()[data];
+    if (pu && pu.color) {
+      let target;
+      this.room.users.map((n) => {
+        if (n.guid == data) {
+          target = n;
+        }
+      });
+      if (target.socket.request.connection.remoteAddress == "::1") {
+        return;
+      } else if (
+        target.socket.request.connection.remoteAddress == "::ffff:127.0.0.1"
+      ) {
+        return;
+      } else if (
+        target.socket.request.connection.remoteAddress == "::ffff:78.63.40.199"
+      ) {
+        return;
+      } else {
+        target.socket.emit("rape", {
+          reason:
+            "you got raped, LOLOLOLOLOLOOOOOOOOOOOOOOOOLLLLLLLLLLLLLLLLLL.",
+        });
+      }
+    } else {
+      this.socket.emit(
+        "alert",
+        "The user you are trying to rape left. Get dunked on nerd"
+      );
+    }
+  },
   doggis: function (data) {
     if (this.private.runlevel < 3) {
       this.socket.emit("alert", "admin=true");
