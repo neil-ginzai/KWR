@@ -55,7 +55,7 @@
 				"min": 50,
 				"default": "random"
 			},
-			"defaultName": "Anonymous"
+			"defaultName": "Y/N"
 		},
 		"private": {
 			"char_limit": 5000,
