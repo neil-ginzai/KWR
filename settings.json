@@ -112,7 +112,7 @@
 				"min": 50,
 				"default": "random"
 			},
-			"defaultName": "Anonymous"
+			"defaultName": "Y/N"
 		}
 	},
 	"consoleOutput": true,
